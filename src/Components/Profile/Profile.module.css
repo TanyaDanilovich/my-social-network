@@ -1,0 +1,18 @@
+.wrapper {
+    grid-area: c;
+    background-color: #e3d2ff;
+}
+
+.profileHeader {
+    display: flex;
+    flex-direction: row;
+}
+
+.pageTitle {
+    color: #673ab7;
+    width: 50%;
+}
+
+.mainBanner {
+    width: 50%;
+}

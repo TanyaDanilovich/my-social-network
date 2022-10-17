@@ -1,0 +1,6 @@
+.wrapper {
+    grid-area: b;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+}
