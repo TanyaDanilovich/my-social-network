@@ -1,7 +1,3 @@
-.wrapper {
-    grid-area: c;
-    background-color: #e3d2ff;
-}
 
 .profileHeader {
     display: flex;

@@ -3,7 +3,8 @@ import classes from './Profile.module.css'
 import mainBanner from '../../assets/MainBanner.png'
 import MyPosts from './MyPosts/MyPosts';
 
-export default function Profile() {
+export type ProfilePropsType = { id: number }
+export default function Profile(props: ProfilePropsType) {
     return (
         <div className={classes.wrapper}>
             <div className={classes.profileHeader}>

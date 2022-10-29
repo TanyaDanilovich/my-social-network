@@ -8,3 +8,8 @@
     padding: 20px;
     font-family: 'Open Sans', sans-serif;
 }
+
+.app-wrapper-content {
+    grid-area: c;
+    background-color: #e3d2ff;
+}

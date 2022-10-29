@@ -1,6 +1,17 @@
 .wrapper {
     grid-area: b;
-    background-color: #ffffff;
+    background-color: var(--v-pri);
     display: flex;
     flex-direction: column;
+}
+
+.link {
+    text-decoration: none;
+    font-weight: 500;
+    color: var(--v-accent-darken3)
+}
+
+.active {
+    color: var(--v-accent-darken2);
+    font-weight: 700;
 }
