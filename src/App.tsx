@@ -9,12 +9,10 @@ import Profile from './Components/Profile/Profile';
 import Music from './Components/Musiс/Music';
 import Setting from './Components/Setting/Setting';
 import News from './Components/News/News';
-import {DialogsItemsType, MessagesType, PostsType} from './index';
+import {DialogsItemsType, MessagesType, PostsType, StateType} from './state';
 
 export type AppPropsType = {
-    posts: PostsType
-    dialogs: DialogsItemsType
-    messages: MessagesType
+    state: StateType
 }
 
 function App(props: AppPropsType) {
@@ -25,8 +23,8 @@ function App(props: AppPropsType) {
             <div className={'app-wrapper-content'}>
                 <Routes>
                     <Route path="/dialogs/*"
-                           element={<Dialogs id={1} dialogs={props.dialogs} messages={props.messages}/>}/>
-                    <Route path="/profile" element={<Profile id={1} posts={props.posts}/>}/>
+                           element={<Dialogs id={1} data={props.state.messagesPage}/>}/>
+                    <Route path="/profile" element={<Profile id={1} data={props.state.profilePage}/>}/>
                     <Route path="/music" element={<Music id={1}/>}/>
                     <Route path="/setting" element={<Setting id={1}/>}/>
                     <Route path="/news" element={<News id={1}/>}/>

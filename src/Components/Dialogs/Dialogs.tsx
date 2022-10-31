@@ -2,20 +2,22 @@ import React from 'react';
 import classes from './Dialogs.module.css'
 import Message from './Message/Message';
 import DialogItem from './DialogItem/DialogItem';
-import {DialogsItemsType, MessagesType} from '../../index';
+import {MessagesPageType} from '../../state';
+
 
 export type  DialogsPropsTypes = {
     id: number
-    dialogs: DialogsItemsType
-    messages: MessagesType
+    data: MessagesPageType
 };
 
 function Dialogs(props: DialogsPropsTypes) {
 
 
-    const dialogsItems = props.dialogs.map(dialog => <DialogItem id={dialog.id} name={dialog.name}/>)
+    const dialogsItems = props.data.dialogsItemsObj.map(dialog => <DialogItem id={dialog.id}
+                                                                              name={dialog.name}/>)
 
-    const messagesItem = props.messages.map(message => <Message id={message.id} text={message.text}/>)
+    const messagesItem = props.data.messagesObj.map(message => <Message id={message.id}
+                                                                        text={message.text}/>)
 
     return (
         <div className={classes.wrapper}>
