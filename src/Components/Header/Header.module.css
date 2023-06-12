@@ -1,0 +1,16 @@
+.wrapper {
+    grid-area: a;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.logo {
+    width: 50px;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: bold;
+}

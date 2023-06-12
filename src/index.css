@@ -1,13 +1,96 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+:root {
+    --v-anchor-base: #2196f3;
+    --v-primary-base: #424242;
+    --v-accent-base: #304ffe;
+    --v-accent-lighten5: #e3d2ff;
+    --v-accent-lighten4: #c3b6ff;
+    --v-accent-lighten3: #a39bff;
+    --v-accent-lighten2: #8181ff;
+    --v-accent-lighten1: #5d67ff;
+    --v-accent-darken1: #0038e1;
+    --v-accent-darken2: #0022c4;
+    --v-accent-darken3: #000fa8;
+    --v-accent-darken4: #00008c;
+    --v-error-base: #ff5252;
+    --v-error-lighten5: #ffe4d5;
+    --v-error-lighten4: #ffc6b9;
+    --v-error-lighten3: #ffa99e;
+    --v-error-lighten2: #ff8c84;
+    --v-error-lighten1: #ff6f6a;
+    --v-error-darken1: #df323b;
+    --v-error-darken2: #bf0025;
+    --v-error-darken3: #9f0010;
+    --v-error-darken4: #800000;
+    --v-info-base: #2196f3;
+    --v-info-lighten5: #d4ffff;
+    --v-info-lighten4: #b5ffff;
+    --v-info-lighten3: #95e8ff;
+    --v-info-lighten2: #75ccff;
+    --v-info-lighten1: #51b0ff;
+    --v-info-darken1: #007cd6;
+    --v-info-darken2: #0064ba;
+    --v-info-darken3: #004d9f;
+    --v-info-darken4: #003784;
+    --v-success-base: #4caf50;
+    --v-success-lighten5: #dcffd6;
+    --v-success-lighten4: #beffba;
+    --v-success-lighten3: #a2ff9e;
+    --v-success-lighten2: #85e783;
+    --v-success-lighten1: #69cb69;
+    --v-success-darken1: #2d9437;
+    --v-success-darken2: #00791e;
+    --v-success-darken3: #006000;
+    --v-success-darken4: #004700;
+    --v-warning-base: #fb8c00;
+    --v-warning-lighten5: #ffff9e;
+    --v-warning-lighten4: #fffb82;
+    --v-warning-lighten3: #ffdf67;
+    --v-warning-lighten2: #ffc24b;
+    --v-warning-lighten1: #ffa72d;
+    --v-warning-darken1: #db7200;
+    --v-warning-darken2: #bb5900;
+    --v-warning-darken3: #9d4000;
+    --v-warning-darken4: #802700;
+    --v-primarylight-base: #e0e0e0;
+    --v-primarylight-lighten2: #ffffff;
+    --v-primarylight-lighten1: #fdfdfd;
+    --v-primarylight-darken1: #c4c4c4;
+    --v-primarylight-darken2: #a9a9a9;
+    --v-primarylight-darken3: #8e8e8e;
+    --v-primarylight-darken4: #757575;
+    --v-primarydark-lighten5: #777777;
+    --v-primarydark-lighten4: #5e5e5e;
+    --v-primarydark-lighten3: #474747;
+    --v-primarydark-lighten2: #303030;
+    --v-primarydark-lighten1: #1b1b1b;
+    --v-primarydark-darken1: #000000;
+    --v-accentlight-base: #c5cae9;
+    --v-accentlight-lighten3: #ffffff;
+    --v-accentlight-lighten2: #feffff;
+    --v-accentlight-lighten1: #e1e6ff;
+    --v-accentlight-darken1: #aaafcd;
+    --v-accentlight-darken2: #8f94b1;
+    --v-accentlight-darken3: #757a97;
+    --v-accentlight-darken4: #5c617d;
+    --v-accentdark-base: #1a237e;
+    --v-accentdark-lighten5: #ad9cff;
+    --v-accentdark-lighten4: #9081ec;
+    --v-accentdark-lighten3: #7468d0;
+    --v-accentdark-lighten2: #5850b4;
+    --v-accentdark-lighten1: #3b3998;
+    --v-accentdark-darken1: #000f64;
+    --v-accentdark-darken2: #00004c;
+    --v-accentdark-darken3: #000036;
+    --v-accentdark-darken4: #000023;
 }
