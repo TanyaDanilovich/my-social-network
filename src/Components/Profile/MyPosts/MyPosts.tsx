@@ -7,13 +7,17 @@ import {PostsType} from '../../../state';
 export type MyPostsPropsType = { posts: PostsType }
 
 export default function MyPosts(props: MyPostsPropsType) {
-
-    const posts = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
+    const postRef = React.createRef<HTMLTextAreaElement>()
+    const posts = props.posts.map((p, index) => <Post key = {`${index}-p`} message = {p.message}
+                                                      likesCount = {p.likesCount}/>)
+    const handleAddPost = () => {
+        postRef.current && console.log(postRef.current.value)
+    }
     return (
-        <div className={classes.wrapper}>
+        <div className = {classes.wrapper}>
             <div>
-                <textarea></textarea>
-                <button>Add post</button>
+                <textarea ref = {postRef}></textarea>
+                <button onClick = {handleAddPost}>Add post</button>
             </div>
             {posts}
         </div>
