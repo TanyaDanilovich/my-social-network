@@ -1,7 +1,7 @@
 import React from 'react';
 import {render, screen} from '@testing-library/react';
 import App from './App';
-import {addPost, DialogsItemsType, MessagesType, PostsType, StateType} from './state';
+import {addPost, StateType} from './state';
 
 test('renders learn react link', () => {
     let state: StateType = {
@@ -11,6 +11,7 @@ test('renders learn react link', () => {
                 {id: 2, message: 'Привет привет', likesCount: 5},
                 {id: 3, message: 'Привет привет привет', likesCount: 9},
             ],
+            newPostText: ''
         },
         messagesPage: {
             messagesObj: [

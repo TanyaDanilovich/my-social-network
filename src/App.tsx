@@ -9,7 +9,7 @@ import Profile from './Components/Profile/Profile';
 import Music from './Components/Musiс/Music';
 import Setting from './Components/Setting/Setting';
 import News from './Components/News/News';
-import {StateType} from './state';
+import {newPostTextChange, StateType} from './state';
 
 export type AppPropsType = {
     state: StateType
@@ -26,7 +26,10 @@ function App({state, addPost}: AppPropsType) {
                     <Route path = "/dialogs/*"
                            element = {<Dialogs id = {1} data = {state.messagesPage}/>}/>
                     <Route path = "/profile"
-                           element = {<Profile id = {1} data = {state.profilePage} addPostCallback = {addPost}/>}/>
+                           element = {<Profile id = {1}
+                                               data = {state.profilePage}
+                                               addPostCallback = {addPost}
+                                               newPostTextChangeCallback = {newPostTextChange}/>}/>
                     <Route path = "/music" element = {<Music id = {1}/>}/>
                     <Route path = "/setting" element = {<Setting id = {1}/>}/>
                     <Route path = "/news" element = {<News id = {1}/>}/>
