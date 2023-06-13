@@ -9,25 +9,27 @@ import Profile from './Components/Profile/Profile';
 import Music from './Components/Musiс/Music';
 import Setting from './Components/Setting/Setting';
 import News from './Components/News/News';
-import {DialogsItemsType, MessagesType, PostsType, StateType} from './state';
+import {StateType} from './state';
 
 export type AppPropsType = {
     state: StateType
+    addPost: (post: string) => void
 }
 
-function App(props: AppPropsType) {
+function App({state, addPost}: AppPropsType) {
     return (<BrowserRouter>
-        <div className="App">
+        <div className = "App">
             <Header/>
             <Navigation/>
-            <div className={'app-wrapper-content'}>
+            <div className = {'app-wrapper-content'}>
                 <Routes>
-                    <Route path="/dialogs/*"
-                           element={<Dialogs id={1} data={props.state.messagesPage}/>}/>
-                    <Route path="/profile" element={<Profile id={1} data={props.state.profilePage}/>}/>
-                    <Route path="/music" element={<Music id={1}/>}/>
-                    <Route path="/setting" element={<Setting id={1}/>}/>
-                    <Route path="/news" element={<News id={1}/>}/>
+                    <Route path = "/dialogs/*"
+                           element = {<Dialogs id = {1} data = {state.messagesPage}/>}/>
+                    <Route path = "/profile"
+                           element = {<Profile id = {1} data = {state.profilePage} addPostCallback = {addPost}/>}/>
+                    <Route path = "/music" element = {<Music id = {1}/>}/>
+                    <Route path = "/setting" element = {<Setting id = {1}/>}/>
+                    <Route path = "/news" element = {<News id = {1}/>}/>
                 </Routes>
 
             </div>

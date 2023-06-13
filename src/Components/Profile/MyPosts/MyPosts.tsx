@@ -4,14 +4,17 @@ import Post from './Post/Post';
 import {PostsType} from '../../../state';
 
 
-export type MyPostsPropsType = { posts: PostsType }
+export type MyPostsPropsType = {
+    posts: PostsType
+    addPostCallback: (post: string) => void
+}
 
-export default function MyPosts(props: MyPostsPropsType) {
+export default function MyPosts({posts, addPostCallback}: MyPostsPropsType) {
     const postRef = React.createRef<HTMLTextAreaElement>()
-    const posts = props.posts.map((p, index) => <Post key = {`${index}-p`} message = {p.message}
-                                                      likesCount = {p.likesCount}/>)
+    const localPosts = posts.map((p, index) => <Post key = {`${index}-p`} message = {p.message}
+                                                     likesCount = {p.likesCount}/>)
     const handleAddPost = () => {
-        postRef.current && console.log(postRef.current.value)
+        postRef.current && addPostCallback(postRef.current.value)
     }
     return (
         <div className = {classes.wrapper}>
@@ -19,7 +22,7 @@ export default function MyPosts(props: MyPostsPropsType) {
                 <textarea ref = {postRef}></textarea>
                 <button onClick = {handleAddPost}>Add post</button>
             </div>
-            {posts}
+            {localPosts}
         </div>
     )
 }
