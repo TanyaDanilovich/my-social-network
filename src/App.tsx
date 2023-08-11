@@ -9,14 +9,15 @@ import Profile from './Components/Profile/Profile';
 import Music from './Components/Musiс/Music';
 import Setting from './Components/Setting/Setting';
 import News from './Components/News/News';
-import {newPostTextChange, StateType} from './state';
+import {StateType} from './state';
 
 export type AppPropsType = {
     state: StateType
     addPost: (post: string) => void
+    updateNewPostText: (newText: string) => void
 }
 
-function App({state, addPost}: AppPropsType) {
+function App({state, addPost, updateNewPostText}: AppPropsType) {
     return (<BrowserRouter>
         <div className = "App">
             <Header/>
@@ -29,7 +30,7 @@ function App({state, addPost}: AppPropsType) {
                            element = {<Profile id = {1}
                                                data = {state.profilePage}
                                                addPostCallback = {addPost}
-                                               newPostTextChangeCallback = {newPostTextChange}/>}/>
+                                               newPostTextChangeCallback = {updateNewPostText}/>}/>
                     <Route path = "/music" element = {<Music id = {1}/>}/>
                     <Route path = "/setting" element = {<Setting id = {1}/>}/>
                     <Route path = "/news" element = {<News id = {1}/>}/>

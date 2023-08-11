@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, KeyboardEvent} from 'react';
 import classes from './MyPosts.module.css'
 import Post from './Post/Post';
 import {PostsType} from '../../../state';
@@ -19,10 +19,13 @@ export default function MyPosts({posts, addPostCallback, newPostText, newPostTex
     }
     const localPosts = posts.map((p, index) => <Post key = {`${index}-p`} message = {p.message}
                                                      likesCount = {p.likesCount}/>)
+
     const handleAddPost = () => {
-        addPostCallback(newPostText)
+        newPostText !== '' && addPostCallback(newPostText)
         postRef.current?.focus()
     }
+
+
     return (
         <div className = {classes.wrapper}>
             <div>

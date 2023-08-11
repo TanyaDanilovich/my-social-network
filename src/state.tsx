@@ -1,5 +1,3 @@
-import {rerenderEntireTree} from './render';
-
 export type PostType = {
     id: number
     message: string
@@ -38,6 +36,10 @@ export type StateType = {
     sideBar?: SideBarType
 }
 
+type ObserverType = (state: StateType) => void
+
+let rerenderEntireTree = (state: StateType) => console.log('rerenderEntireTree')
+
 let state: StateType = {
     profilePage: {
         postsObj: [
@@ -63,6 +65,7 @@ let state: StateType = {
 
 }
 
+
 export const addPost = (post: string) => {
     const newId = state.profilePage.postsObj.length + 1
     const newText = state.profilePage.newPostText
@@ -79,7 +82,7 @@ export const addPost = (post: string) => {
     rerenderEntireTree(state)
 }
 
-export const newPostTextChange = (newText: string) => {
+export const updateNewPostText = (newText: string) => {
     state = {
         ...state,
         profilePage: {
@@ -89,5 +92,16 @@ export const newPostTextChange = (newText: string) => {
     rerenderEntireTree(state);
 }
 
+export const subscribe = (observer: ObserverType) => {
+    rerenderEntireTree = observer
+}
 
 export default state;
+
+declare global {
+    interface Window {
+        state: StateType;
+    }
+}
+
+window.state = state

@@ -1,7 +1,7 @@
 import React from 'react';
 import {render, screen} from '@testing-library/react';
 import App from './App';
-import {addPost, StateType} from './state';
+import {addPost, StateType, updateNewPostText} from './state';
 
 test('renders learn react link', () => {
     let state: StateType = {
@@ -27,7 +27,7 @@ test('renders learn react link', () => {
         }, sideBar: {}
 
     }
-    render(<App state = {state} addPost = {addPost}/>);
+    render(<App state = {state} addPost = {addPost} updateNewPostText = {updateNewPostText}/>);
     const linkElement = screen.getByText(/learn react/i);
     expect(linkElement).toBeInTheDocument();
 });
