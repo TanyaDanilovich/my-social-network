@@ -1,6 +1,5 @@
 import React from 'react';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-
 import './App.css';
 import Header from './Components/Header/Header';
 import Navigation from './Components/Navigation/Navigation';
@@ -18,27 +17,28 @@ export type AppPropsType = {
 }
 
 function App({state, addPost, updateNewPostText}: AppPropsType) {
-    return (<BrowserRouter>
-        <div className = "App">
-            <Header/>
-            <Navigation/>
-            <div className = {'app-wrapper-content'}>
-                <Routes>
-                    <Route path = "/dialogs/*"
-                           element = {<Dialogs id = {1} data = {state.messagesPage}/>}/>
-                    <Route path = "/profile"
-                           element = {<Profile id = {1}
-                                               data = {state.profilePage}
-                                               addPostCallback = {addPost}
-                                               newPostTextChangeCallback = {updateNewPostText}/>}/>
-                    <Route path = "/music" element = {<Music id = {1}/>}/>
-                    <Route path = "/setting" element = {<Setting id = {1}/>}/>
-                    <Route path = "/news" element = {<News id = {1}/>}/>
-                </Routes>
+    return (
+        <BrowserRouter>
+            <div className = "App">
+                <Header/>
+                <Navigation/>
+                <div className = {'app-wrapper-content'}>
+                    <Routes>
+                        <Route path = "/dialogs/*"
+                               element = {<Dialogs id = {1} data = {state.messagesPage}/>}/>
+                        <Route path = "/profile"
+                               element = {<Profile id = {1}
+                                                   data = {state.profilePage}
+                                                   addPostCallback = {addPost}
+                                                   newPostTextChangeCallback = {updateNewPostText}/>}/>
+                        <Route path = "/music" element = {<Music id = {1}/>}/>
+                        <Route path = "/setting" element = {<Setting id = {1}/>}/>
+                        <Route path = "/news" element = {<News id = {1}/>}/>
+                    </Routes>
 
+                </div>
             </div>
-        </div>
-    </BrowserRouter>)
+        </BrowserRouter>)
 }
 
 export default App;

@@ -1,25 +1,25 @@
-export type PostType = {
+export  type PostType = {
     id: number
     message: string
     likesCount: number
 }
-export type PostsType = PostType[]
+export  type PostsType = PostType[]
 
-export type DialogsItemType = {
+export  type DialogsItemType = {
     id: number
     name: string
 }
 
-export type DialogsItemsType = DialogsItemType[]
+export  type DialogsItemsType = DialogsItemType[]
 
-export type MessageType = {
+export  type MessageType = {
     id: number
     text: string
 }
 
-export type MessagesType = MessageType[]
+export  type MessagesType = MessageType[]
 
-export type ProfilePageType = {
+export  type ProfilePageType = {
     postsObj: PostsType
     newPostText: string
 }
@@ -36,72 +36,86 @@ export type StateType = {
     sideBar?: SideBarType
 }
 
-type ObserverType = (state: StateType) => void
+type ObserverType = () => void
 
-let rerenderEntireTree = (state: StateType) => console.log('rerenderEntireTree')
-
-let state: StateType = {
-    profilePage: {
-        postsObj: [
-            {id: 1, message: 'Привет', likesCount: 2},
-            {id: 2, message: 'Привет привет', likesCount: 5},
-            {id: 3, message: 'Привет привет привет', likesCount: 9},
-        ],
-        newPostText: ''
-
-    },
-    messagesPage: {
-        messagesObj: [
-            {id: 1, text: 'Привет'},
-            {id: 2, text: 'И тебе привет'},
-            {id: 3, text: 'Пока'}
-        ],
-        dialogsItemsObj: [
-            {id: 1, name: 'Вася'},
-            {id: 2, name: 'Петя'},
-            {id: 3, name: 'Гриша'}
-        ]
-    }, sideBar: {}
-
+export type StoreType = {
+    _state: StateType
+    getState: () => StateType
+    onChange: () => void
+    addPost: (post: string) => void
+    updateNewPostText: (newText: string) => void
+    subscribe: (observer: ObserverType) => void
 }
 
 
-export const addPost = (post: string) => {
-    const newId = state.profilePage.postsObj.length + 1
-    const newText = state.profilePage.newPostText
-    state = {
-        ...state,
-        profilePage:
-            {
-                ...state.profilePage,
-                postsObj:
-                    [...state.profilePage.postsObj, {id: newId, message: newText, likesCount: 0}],
-                newPostText: ''
-            }
-    }
-    rerenderEntireTree(state)
-}
+let store: StoreType = {
 
-export const updateNewPostText = (newText: string) => {
-    state = {
-        ...state,
+    _state: {
         profilePage: {
-            ...state.profilePage, newPostText: newText
+            postsObj: [
+                {id: 1, message: 'Привет', likesCount: 2},
+                {id: 2, message: 'Привет привет', likesCount: 5},
+                {id: 3, message: 'Привет привет привет', likesCount: 9},
+            ],
+            newPostText: ''
+
+        },
+        messagesPage: {
+            messagesObj: [
+                {id: 1, text: 'Привет'},
+                {id: 2, text: 'И тебе привет'},
+                {id: 3, text: 'Пока'}
+            ],
+            dialogsItemsObj: [
+                {id: 1, name: 'Вася'},
+                {id: 2, name: 'Петя'},
+                {id: 3, name: 'Гриша'}
+            ]
+        },
+        sideBar: {}
+    },
+
+    getState() {
+        return this._state
+    },
+
+    onChange() {
+        console.log('rerenderEntireTree')
+    },
+
+    addPost(post: string) {
+        const newId = this._state.profilePage.postsObj.length + 1
+        const newText = this._state.profilePage.newPostText
+        this._state = {
+            ...this._state,
+            profilePage:
+                {
+                    ...this._state.profilePage,
+                    postsObj:
+                        [...this._state.profilePage.postsObj, {id: newId, message: newText, likesCount: 0}],
+                    newPostText: ''
+                }
         }
+        this.onChange()
+    },
+
+    updateNewPostText(newText: string) {
+        this._state.profilePage.newPostText = newText
+        this.onChange();
+    },
+
+    subscribe(observer: ObserverType) {
+        this.onChange = observer
     }
-    rerenderEntireTree(state);
 }
 
-export const subscribe = (observer: ObserverType) => {
-    rerenderEntireTree = observer
-}
 
-export default state;
+export default store;
 
 declare global {
     interface Window {
-        state: StateType;
+        store: StoreType;
     }
 }
 
-window.state = state
+window.store = store
