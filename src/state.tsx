@@ -36,13 +36,13 @@ export type StateType = {
     sideBar?: SideBarType
 }
 
-type ObserverType = () => void
+type ObserverType = (state: StateType) => void
 
 export type StoreType = {
     _state: StateType
     getState: () => StateType
-    onChange: () => void
-    addPost: (post: string) => void
+    onChange: (state: StateType) => void
+    addPost: () => void
     updateNewPostText: (newText: string) => void
     subscribe: (observer: ObserverType) => void
 }
@@ -76,6 +76,7 @@ let store: StoreType = {
     },
 
     getState() {
+        //console.dir(this)
         return this._state
     },
 
@@ -83,7 +84,8 @@ let store: StoreType = {
         console.log('rerenderEntireTree')
     },
 
-    addPost(post: string) {
+    addPost() {
+        // debugger
         const newId = this._state.profilePage.postsObj.length + 1
         const newText = this._state.profilePage.newPostText
         this._state = {
@@ -96,12 +98,14 @@ let store: StoreType = {
                     newPostText: ''
                 }
         }
-        this.onChange()
+        this.onChange(this._state)
     },
 
     updateNewPostText(newText: string) {
+        // debugger
+        // console.dir(this)
         this._state.profilePage.newPostText = newText
-        this.onChange();
+        this.onChange(this._state)
     },
 
     subscribe(observer: ObserverType) {

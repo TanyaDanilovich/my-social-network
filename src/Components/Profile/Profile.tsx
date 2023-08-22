@@ -9,7 +9,7 @@ import {ProfilePageType} from '../../state';
 export type ProfilePropsType = {
     id: number
     data: ProfilePageType
-    addPostCallback: (post: string) => void
+    addPostCallback: () => void
     newPostTextChangeCallback: (newText: string) => void
 }
 export default function Profile({id, data, addPostCallback, newPostTextChangeCallback}: ProfilePropsType) {

@@ -12,7 +12,7 @@ import {StateType} from './state';
 
 export type AppPropsType = {
     state: StateType
-    addPost: (post: string) => void
+    addPost: () => void
     updateNewPostText: (newText: string) => void
 }
 
