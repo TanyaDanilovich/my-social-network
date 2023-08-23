@@ -1,32 +1,29 @@
 import React, {ChangeEvent} from 'react';
 import classes from './MyPosts.module.css'
 import Post from './Post/Post';
-import {PostsType} from '../../../state';
+import {ActionType, PostsType} from '../../../state';
 
 
 export type MyPostsPropsType = {
     posts: PostsType
     newPostText: string
-    addPostCallback: () => void
-    newPostTextChangeCallback: (newPostText: string) => void
+    dispatch: (action: ActionType) => void
 }
 
 
-export default function MyPosts({posts, addPostCallback, newPostText, newPostTextChangeCallback}: MyPostsPropsType) {
+export default function MyPosts({posts, newPostText, dispatch}: MyPostsPropsType) {
     const postRef = React.createRef<HTMLTextAreaElement>()
 
-
     function newPostTextChange(event: ChangeEvent<HTMLTextAreaElement>) {
-        console.log("newPostText=", newPostText)
-        console.log(event.currentTarget.value)
-        newPostTextChangeCallback(event.currentTarget.value)
+        dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: event.currentTarget.value})
     }
 
-    const localPosts = posts.map((p, index) => <Post key = {`${index}-p`} message = {p.message}
-                                                     likesCount = {p.likesCount}/>)
+    const localPosts = posts.map((p, index) =>
+        <Post key = {`${index}-p`} message = {p.message}
+              likesCount = {p.likesCount}/>)
 
     const handleAddPost = () => {
-        newPostText !== '' && addPostCallback()
+        newPostText !== '' && dispatch({type: 'ADD-POST'})
         postRef.current?.focus()
     }
 

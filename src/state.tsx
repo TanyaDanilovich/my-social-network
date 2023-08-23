@@ -38,12 +38,25 @@ export type StateType = {
 
 type ObserverType = (state: StateType) => void
 
+export type AddPostActionType = {
+    type: "ADD-POST"
+}
+export type UpdateNewPostTextActionType = {
+    type: "UPDATE-NEW-POST-TEXT"
+    newText: string
+}
+
+
+export type ActionType = AddPostActionType | UpdateNewPostTextActionType
+
+
 export type StoreType = {
     _state: StateType
+    _onChange: (state: StateType) => void
     getState: () => StateType
-    onChange: (state: StateType) => void
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
+    //addPost: () => void
+    //updateNewPostText: (newText: string) => void
+    dispatch: (action: ActionType) => void
     subscribe: (observer: ObserverType) => void
 }
 
@@ -74,42 +87,39 @@ let store: StoreType = {
         },
         sideBar: {}
     },
+    _onChange() {
+        console.log('rerenderEntireTree')
+    },
+
 
     getState() {
         //console.dir(this)
         return this._state
     },
-
-    onChange() {
-        console.log('rerenderEntireTree')
-    },
-
-    addPost() {
-        // debugger
-        const newId = this._state.profilePage.postsObj.length + 1
-        const newText = this._state.profilePage.newPostText
-        this._state = {
-            ...this._state,
-            profilePage:
-                {
-                    ...this._state.profilePage,
-                    postsObj:
-                        [...this._state.profilePage.postsObj, {id: newId, message: newText, likesCount: 0}],
-                    newPostText: ''
-                }
-        }
-        this.onChange(this._state)
-    },
-
-    updateNewPostText(newText: string) {
-        // debugger
-        // console.dir(this)
-        this._state.profilePage.newPostText = newText
-        this.onChange(this._state)
-    },
-
     subscribe(observer: ObserverType) {
-        this.onChange = observer
+        this._onChange = observer
+    },
+
+
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            const newId = this._state.profilePage.postsObj.length + 1
+            const newText = this._state.profilePage.newPostText
+            this._state = {
+                ...this._state,
+                profilePage:
+                    {
+                        ...this._state.profilePage,
+                        postsObj:
+                            [...this._state.profilePage.postsObj, {id: newId, message: newText, likesCount: 0}],
+                        newPostText: ''
+                    }
+            }
+            this._onChange(this._state)
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePage.newPostText = action.newText
+            this._onChange(this._state)
+        }
     }
 }
 

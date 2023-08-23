@@ -8,15 +8,14 @@ import Profile from './Components/Profile/Profile';
 import Music from './Components/Musiс/Music';
 import Setting from './Components/Setting/Setting';
 import News from './Components/News/News';
-import {StateType} from './state';
+import {ActionType, StateType} from './state';
 
 export type AppPropsType = {
     state: StateType
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
+    dispatch: (action: ActionType) => void
 }
 
-function App({state, addPost, updateNewPostText}: AppPropsType) {
+function App({state, dispatch}: AppPropsType) {
     return (
         <BrowserRouter>
             <div className = "App">
@@ -29,8 +28,7 @@ function App({state, addPost, updateNewPostText}: AppPropsType) {
                         <Route path = "/profile"
                                element = {<Profile id = {1}
                                                    data = {state.profilePage}
-                                                   addPostCallback = {addPost}
-                                                   newPostTextChangeCallback = {updateNewPostText}/>}/>
+                                                   dispatch = {dispatch}/>}/>
                         <Route path = "/music" element = {<Music id = {1}/>}/>
                         <Route path = "/setting" element = {<Setting id = {1}/>}/>
                         <Route path = "/news" element = {<News id = {1}/>}/>
