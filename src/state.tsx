@@ -38,11 +38,14 @@ export type StateType = {
 
 type ObserverType = (state: StateType) => void
 
+const ADD_POST = "ADD-POST"
+const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
+
 export type AddPostActionType = {
-    type: "ADD-POST"
+    type: typeof ADD_POST
 }
 export type UpdateNewPostTextActionType = {
-    type: "UPDATE-NEW-POST-TEXT"
+    type: typeof UPDATE_NEW_POST_TEXT
     newText: string
 }
 
@@ -102,7 +105,7 @@ let store: StoreType = {
 
 
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
+        if (action.type === ADD_POST) {
             const newId = this._state.profilePage.postsObj.length + 1
             const newText = this._state.profilePage.newPostText
             this._state = {
@@ -116,13 +119,14 @@ let store: StoreType = {
                     }
             }
             this._onChange(this._state)
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+        } else if (action.type === UPDATE_NEW_POST_TEXT) {
             this._state.profilePage.newPostText = action.newText
             this._onChange(this._state)
         }
     }
 }
 
+export const AddPostAC = () => ({type: ADD_POST})
 
 export default store;
 
