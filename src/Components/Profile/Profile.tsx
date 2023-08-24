@@ -3,7 +3,7 @@ import classes from './Profile.module.css'
 import MyPosts from './MyPosts/MyPosts';
 import ProfileInfo from './ProfileInfo';
 import mainBanner from '../../assets/MainBanner.png';
-import {ActionsType, ProfilePageType} from '../../state';
+import {ActionsType, ProfilePageType} from '../../redux/state';
 
 
 export type ProfilePropsType = {
