@@ -8,11 +8,11 @@ import Profile from './Components/Profile/Profile';
 import Music from './Components/Musiс/Music';
 import Setting from './Components/Setting/Setting';
 import News from './Components/News/News';
-import {ActionType, StateType} from './state';
+import {ActionsType, StateType} from './state';
 
 export type AppPropsType = {
     state: StateType
-    dispatch: (action: ActionType) => void
+    dispatch: (action: ActionsType) => void
 }
 
 function App({state, dispatch}: AppPropsType) {
@@ -24,7 +24,7 @@ function App({state, dispatch}: AppPropsType) {
                 <div className = {'app-wrapper-content'}>
                     <Routes>
                         <Route path = "/dialogs/*"
-                               element = {<Dialogs id = {1} data = {state.messagesPage}/>}/>
+                               element = {<Dialogs id = {1} data = {state.dialogsPage}/>}/>
                         <Route path = "/profile"
                                element = {<Profile id = {1}
                                                    data = {state.profilePage}

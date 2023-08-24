@@ -5,12 +5,12 @@ export  type PostType = {
 }
 export  type PostsType = PostType[]
 
-export  type DialogsItemType = {
+export  type DialogType = {
     id: number
     name: string
 }
 
-export  type DialogsItemsType = DialogsItemType[]
+export  type DialogsType = DialogType[]
 
 export  type MessageType = {
     id: number
@@ -24,15 +24,15 @@ export  type ProfilePageType = {
     newPostText: string
 }
 
-export type MessagesPageType = {
-    messagesObj: MessagesType
-    dialogsItemsObj: DialogsItemsType
+export type DialogsPageType = {
+    messages: MessagesType
+    dialogs: DialogsType
 }
 export type SideBarType = {}
 
 export type StateType = {
     profilePage: ProfilePageType
-    messagesPage: MessagesPageType
+    dialogsPage: DialogsPageType
     sideBar?: SideBarType
 }
 
@@ -44,13 +44,19 @@ const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
 export type AddPostActionType = {
     type: typeof ADD_POST
 }
+
 export type UpdateNewPostTextActionType = {
     type: typeof UPDATE_NEW_POST_TEXT
     newText: string
 }
 
+export const AddPostAC = (): AddPostActionType => ({type: ADD_POST})
+export const UpdateNewPostTextAC = (newText: string): UpdateNewPostTextActionType => ({
+    type: UPDATE_NEW_POST_TEXT,
+    newText: newText
+})
 
-export type ActionType = AddPostActionType | UpdateNewPostTextActionType
+export type ActionsType = AddPostActionType | UpdateNewPostTextActionType
 
 
 export type StoreType = {
@@ -59,7 +65,7 @@ export type StoreType = {
     getState: () => StateType
     //addPost: () => void
     //updateNewPostText: (newText: string) => void
-    dispatch: (action: ActionType) => void
+    dispatch: (action: ActionsType) => void
     subscribe: (observer: ObserverType) => void
 }
 
@@ -76,13 +82,13 @@ let store: StoreType = {
             newPostText: ''
 
         },
-        messagesPage: {
-            messagesObj: [
+        dialogsPage: {
+            messages: [
                 {id: 1, text: 'Привет'},
                 {id: 2, text: 'И тебе привет'},
                 {id: 3, text: 'Пока'}
             ],
-            dialogsItemsObj: [
+            dialogs: [
                 {id: 1, name: 'Вася'},
                 {id: 2, name: 'Петя'},
                 {id: 3, name: 'Гриша'}
@@ -90,6 +96,7 @@ let store: StoreType = {
         },
         sideBar: {}
     },
+
     _onChange() {
         console.log('rerenderEntireTree')
     },
@@ -126,7 +133,6 @@ let store: StoreType = {
     }
 }
 
-export const AddPostAC = () => ({type: ADD_POST})
 
 export default store;
 

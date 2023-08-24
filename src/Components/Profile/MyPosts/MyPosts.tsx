@@ -1,13 +1,13 @@
 import React, {ChangeEvent} from 'react';
 import classes from './MyPosts.module.css'
 import Post from './Post/Post';
-import {ActionType, PostsType} from '../../../state';
+import {ActionsType, AddPostAC, PostsType, UpdateNewPostTextAC} from '../../../state';
 
 
 export type MyPostsPropsType = {
     posts: PostsType
     newPostText: string
-    dispatch: (action: ActionType) => void
+    dispatch: (action: ActionsType) => void
 }
 
 
@@ -15,7 +15,7 @@ export default function MyPosts({posts, newPostText, dispatch}: MyPostsPropsType
     const postRef = React.createRef<HTMLTextAreaElement>()
 
     function newPostTextChange(event: ChangeEvent<HTMLTextAreaElement>) {
-        dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: event.currentTarget.value})
+        dispatch(UpdateNewPostTextAC(event.currentTarget.value))
     }
 
     const localPosts = posts.map((p, index) =>
@@ -23,7 +23,7 @@ export default function MyPosts({posts, newPostText, dispatch}: MyPostsPropsType
               likesCount = {p.likesCount}/>)
 
     const handleAddPost = () => {
-        newPostText !== '' && dispatch({type: 'ADD-POST'})
+        newPostText !== '' && dispatch(AddPostAC())
         postRef.current?.focus()
     }
 

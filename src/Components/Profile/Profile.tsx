@@ -3,13 +3,13 @@ import classes from './Profile.module.css'
 import MyPosts from './MyPosts/MyPosts';
 import ProfileInfo from './ProfileInfo';
 import mainBanner from '../../assets/MainBanner.png';
-import {ActionType, ProfilePageType} from '../../state';
+import {ActionsType, ProfilePageType} from '../../state';
 
 
 export type ProfilePropsType = {
     id: number
     data: ProfilePageType
-    dispatch: (action: ActionType) => void
+    dispatch: (action: ActionsType) => void
 }
 export default function Profile({id, data, dispatch}: ProfilePropsType) {
     return (
