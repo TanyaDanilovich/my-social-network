@@ -24,7 +24,7 @@ function App({state, dispatch}: AppPropsType) {
                 <div className = {'app-wrapper-content'}>
                     <Routes>
                         <Route path = "/dialogs/*"
-                               element = {<Dialogs id = {1} data = {state.dialogsPage}/>}/>
+                               element = {<Dialogs id = {1} data = {state.dialogsPage} dispatch = {dispatch}/>}/>
                         <Route path = "/profile"
                                element = {<Profile id = {1}
                                                    data = {state.profilePage}
