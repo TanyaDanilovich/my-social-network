@@ -2,26 +2,26 @@ import React, {ChangeEvent} from 'react';
 import classes from './Dialogs.module.css'
 import Message from './Message/Message';
 import DialogItem from './DialogItem/DialogItem';
-import {ActionsType, AddMessagesAC, DialogsPageType, UpdateNewMessagesTextAC} from '../../state';
+import {AddMessagesAC, StoreType, UpdateNewMessagesTextAC} from '../../state';
 
 
 export type  DialogsPropsTypes = {
     id: number
-    data: DialogsPageType
-    dispatch: (action: ActionsType) => void
+    store: StoreType
 };
 
 function Dialogs(props: DialogsPropsTypes) {
+    const state = props.store.getState()
 
     const newDialogRef = React.createRef<HTMLInputElement>()
     const newMessageRef = React.createRef<HTMLTextAreaElement>()
 
-    const dialogsItems = props.data.dialogs
+    const dialogsItems = state.dialogsPage.dialogs
         .map((dialog, index) =>
             <DialogItem key = {`${index}-d`} id = {dialog.id}
                         name = {dialog.name}/>)
 
-    const messagesItem = props.data.messages
+    const messagesItem = state.dialogsPage.messages
         .map((message, index) =>
             <Message key = {`${index}-m`} id = {message.id} text = {message.text}/>)
 
@@ -30,10 +30,10 @@ function Dialogs(props: DialogsPropsTypes) {
     }
     const handleChangeNewMessagesText =
         (event: ChangeEvent<HTMLTextAreaElement>) =>
-            props.dispatch(UpdateNewMessagesTextAC(event.currentTarget.value))
+            props.store.dispatch(UpdateNewMessagesTextAC(event.currentTarget.value))
 
-    const handleAddMessage = () => props.dispatch(AddMessagesAC())
-    
+    const handleAddMessage = () => props.store.dispatch(AddMessagesAC())
+
 
     return (
         <div className = {classes.wrapper}>
@@ -46,7 +46,7 @@ function Dialogs(props: DialogsPropsTypes) {
                 {messagesItem}
                 <textarea ref = {newMessageRef}
                           onChange = {handleChangeNewMessagesText}
-                          value = {props.data.newMessagesText}
+                          value = {state.dialogsPage.newMessagesText}
                 />
                 <button onClick = {handleAddMessage}>Add message</button>
             </div>

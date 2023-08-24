@@ -8,14 +8,15 @@ import Profile from './Components/Profile/Profile';
 import Music from './Components/Musiс/Music';
 import Setting from './Components/Setting/Setting';
 import News from './Components/News/News';
-import {ActionsType, StateType} from './state';
+import {ActionsType, StateType, StoreType} from './state';
 
 export type AppPropsType = {
+    store: StoreType
     state: StateType
     dispatch: (action: ActionsType) => void
 }
 
-function App({state, dispatch}: AppPropsType) {
+function App({store, state, dispatch}: AppPropsType) {
     return (
         <BrowserRouter>
             <div className = "App">
@@ -24,7 +25,7 @@ function App({state, dispatch}: AppPropsType) {
                 <div className = {'app-wrapper-content'}>
                     <Routes>
                         <Route path = "/dialogs/*"
-                               element = {<Dialogs id = {1} data = {state.dialogsPage} dispatch = {dispatch}/>}/>
+                               element = {<Dialogs id = {1} store = {store}/>}/>
                         <Route path = "/profile"
                                element = {<Profile id = {1}
                                                    data = {state.profilePage}
