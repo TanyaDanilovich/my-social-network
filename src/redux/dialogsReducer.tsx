@@ -18,7 +18,21 @@ export const UpdateNewMessagesTextAC = (newText: string): UpdateNewMessagesTextA
     newText: newText
 })
 
-const dialogsReducer = (state: DialogsPageType, action: ActionsType): DialogsPageType => {
+const initialState = {
+    messages: [
+        {id: 1, text: 'Привет'},
+        {id: 2, text: 'И тебе привет'},
+        {id: 3, text: 'Пока'}
+    ],
+    dialogs: [
+        {id: 1, name: 'Вася'},
+        {id: 2, name: 'Петя'},
+        {id: 3, name: 'Гриша'}
+    ],
+    newMessagesText: '',
+}
+
+const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsType): DialogsPageType => {
 
     if (action.type === UPDATE_NEW_MESSAGES_TEXT) {
         state.newMessagesText = action.newText
