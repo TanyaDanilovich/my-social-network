@@ -2,38 +2,44 @@ import React, {ChangeEvent} from 'react';
 import classes from './Dialogs.module.css'
 import Message from './Message/Message';
 import DialogItem from './DialogItem/DialogItem';
-import {StoreType} from '../../redux/state';
-import {AddMessagesAC, UpdateNewMessagesTextAC} from '../../redux/dialogsReducer';
+import {DialogsType, MessagesType} from '../../redux/state';
 
 
 export type  DialogsPropsTypes = {
     id: number
-    store: StoreType
+    dialogs: DialogsType
+    messages: MessagesType
+    newMessagesText: string
+    handleAddDialog: () => void
+    handleAddMessage: () => void
+    handleChangeNewMessagesText: (text: string) => void
 };
 
-function Dialogs(props: DialogsPropsTypes) {
-    const state = props.store.getState()
+function Dialogs({
+                     id,
+                     dialogs,
+                     messages,
+                     newMessagesText,
+                     handleAddDialog,
+                     handleAddMessage,
+                     handleChangeNewMessagesText
+                 }: DialogsPropsTypes) {
 
     const newDialogRef = React.createRef<HTMLInputElement>()
     const newMessageRef = React.createRef<HTMLTextAreaElement>()
 
-    const dialogsItems = state.dialogsPage.dialogs
-        .map((dialog, index) =>
+    const dialogsItems =
+        dialogs.map((dialog, index) =>
             <DialogItem key = {`${index}-d`} id = {dialog.id}
                         name = {dialog.name}/>)
 
-    const messagesItem = state.dialogsPage.messages
-        .map((message, index) =>
+    const messagesItem =
+        messages.map((message, index) =>
             <Message key = {`${index}-m`} id = {message.id} text = {message.text}/>)
 
-    const handleAddDialog = () => {
-        newDialogRef.current && console.log(newDialogRef.current.value)
-    }
-    const handleChangeNewMessagesText =
+    const onChangeNewMessagesText =
         (event: ChangeEvent<HTMLTextAreaElement>) =>
-            props.store.dispatch(UpdateNewMessagesTextAC(event.currentTarget.value))
-
-    const handleAddMessage = () => props.store.dispatch(AddMessagesAC())
+            handleChangeNewMessagesText(event.currentTarget.value)
 
 
     return (
@@ -46,8 +52,8 @@ function Dialogs(props: DialogsPropsTypes) {
             <div className = {classes.messagesContainer}>
                 {messagesItem}
                 <textarea ref = {newMessageRef}
-                          onChange = {handleChangeNewMessagesText}
-                          value = {state.dialogsPage.newMessagesText}
+                          onChange = {onChangeNewMessagesText}
+                          value = {newMessagesText}
                 />
                 <button onClick = {handleAddMessage}>Add message</button>
             </div>

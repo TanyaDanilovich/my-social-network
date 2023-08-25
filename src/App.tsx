@@ -3,12 +3,12 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import './App.css';
 import Header from './Components/Header/Header';
 import Navigation from './Components/Navigation/Navigation';
-import Dialogs from './Components/Dialogs/Dialogs';
 import Profile from './Components/Profile/Profile';
 import Music from './Components/Musiс/Music';
 import Setting from './Components/Setting/Setting';
 import News from './Components/News/News';
-import {ActionsType, StateType, StoreType} from './redux/state';
+import {ActionsType, StateType} from './redux/state';
+import DialogsContainer from './Components/Dialogs/DialogsContainer';
 
 export type AppPropsType = {
     store: any
@@ -25,7 +25,7 @@ function App({store, state, dispatch}: AppPropsType) {
                 <div className = {'app-wrapper-content'}>
                     <Routes>
                         <Route path = "/dialogs/*"
-                               element = {<Dialogs id = {1} store = {store}/>}/>
+                               element = {<DialogsContainer id = {1} store = {store}/>}/>
                         <Route path = "/profile"
                                element = {<Profile id = {1}
                                                    data = {state.profilePage}
