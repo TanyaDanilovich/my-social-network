@@ -1,3 +1,16 @@
+import profileReducer, {
+    ADD_POST,
+    AddPostActionType,
+    UPDATE_NEW_POST_TEXT,
+    UpdateNewPostTextActionType
+} from './profileReducer';
+import dialogsReducer, {
+    ADD_MESSAGES,
+    AddMessagesActionType,
+    UPDATE_NEW_MESSAGES_TEXT,
+    UpdateNewMessagesTextActionType
+} from './dialogsReducer';
+
 export  type PostType = {
     id: number
     message: string
@@ -39,45 +52,6 @@ export type StateType = {
 
 type ObserverType = (state: StateType) => void
 
-
-//ProfilePage
-const ADD_POST = "ADD-POST"
-const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
-
-export type AddPostActionType = {
-    type: typeof ADD_POST
-}
-
-export type UpdateNewPostTextActionType = {
-    type: typeof UPDATE_NEW_POST_TEXT
-    newText: string
-}
-
-export const AddPostAC = (): AddPostActionType => ({type: ADD_POST})
-export const UpdateNewPostTextAC = (newText: string): UpdateNewPostTextActionType => ({
-    type: UPDATE_NEW_POST_TEXT,
-    newText: newText
-})
-
-
-//DialogsPage
-const ADD_MESSAGES = "ADD-MESSAGES"
-const UPDATE_NEW_MESSAGES_TEXT = "UPDATE-NEW-MESSAGES-TEXT"
-
-export type AddMessagesActionType = {
-    type: typeof ADD_MESSAGES
-}
-
-export type UpdateNewMessagesTextActionType = {
-    type: typeof UPDATE_NEW_MESSAGES_TEXT
-    newText: string
-}
-
-export const AddMessagesAC = (): AddMessagesActionType => ({type: ADD_MESSAGES})
-export const UpdateNewMessagesTextAC = (newText: string): UpdateNewMessagesTextActionType => ({
-    type: UPDATE_NEW_MESSAGES_TEXT,
-    newText: newText
-})
 
 export type ActionsType =
     AddPostActionType |
@@ -140,77 +114,11 @@ let store: StoreType = {
 
 
     dispatch(action) {
-        if (action.type === UPDATE_NEW_POST_TEXT) {
-            this._state.profilePage.newPostText = action.newText
-            this._onChange(this._state)
-        }
-        if (action.type === ADD_POST) {
-            const newId = this._state.profilePage.postsObj.length + 1
-            const newText = this._state.profilePage.newPostText
-            this._state = {
-                ...this._state,
-                profilePage:
-                    {
-                        ...this._state.profilePage,
-                        postsObj:
-                            [...this._state.profilePage.postsObj, {id: newId, message: newText, likesCount: 0}],
-                        newPostText: ''
-                    }
-            }
-            this._onChange(this._state)
-        }
 
-        if (action.type === UPDATE_NEW_MESSAGES_TEXT) {
-            this._state.dialogsPage.newMessagesText = action.newText
-            this._onChange(this._state)
-        }
-        if (action.type === ADD_MESSAGES) {
-            const newId = this._state.dialogsPage.messages.length + 1
-            const newText = this._state.dialogsPage.newMessagesText
-            this._state = {
-                ...this._state,
-                dialogsPage:
-                    {
-                        ...this._state.dialogsPage,
-                        messages:
-                            [...this._state.dialogsPage.messages, {id: newId, text: newText}],
-                        newMessagesText: ''
-                    }
-            }
-            this._onChange(this._state)
-        }
-        // switch (action.type) {
-        //
-        //     case "ADD-POST":
-        //         const newId = this._state.profilePage.postsObj.length + 1
-        //         const newText = this._state.profilePage.newPostText
-        //         this._state = {
-        //             ...this._state,
-        //             profilePage:
-        //                 {
-        //                     ...this._state.profilePage,
-        //                     postsObj:
-        //                         [...this._state.profilePage.postsObj, {id: newId, message: newText, likesCount: 0}],
-        //                     newPostText: ''
-        //                 }
-        //         }
-        //         this._onChange(this._state);
-        //
-        //     case UPDATE_NEW_MESSAGES_TEXT:
-        //         this._state.profilePage.newPostText = action.newText
-        //         this._onChange(this._state)
-        //
-        //     case 'ADD-MESSAGES':
-        //
-        //
-        //     case 'UPDATE-NEW-MESSAGES-TEXT':
-        //
-        //
-        //     default:
-        //         return null
-        // }
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
 
-
+        this._onChange(this._state)
     }
 }
 
