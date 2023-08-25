@@ -13,7 +13,10 @@ function rerenderEntireTree(state: AppStateType) {
 
     root.render(
         //<React.StrictMode>
-        <App store = {store} state = {state} dispatch = {store.dispatch.bind(store)}/>
+        <App store = {store}
+             state = {state}
+             dispatch = {store.dispatch.bind(store)}
+        />
         //</React.StrictMode>
     );
 }
@@ -21,7 +24,9 @@ function rerenderEntireTree(state: AppStateType) {
 
 rerenderEntireTree(store.getState())
 
-store.subscribe(rerenderEntireTree)
+store.subscribe(() => {
+    rerenderEntireTree(store.getState())
+})
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

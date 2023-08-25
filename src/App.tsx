@@ -11,7 +11,7 @@ import News from './Components/News/News';
 import {ActionsType, StateType, StoreType} from './redux/state';
 
 export type AppPropsType = {
-    store: StoreType
+    store: any
     state: StateType
     dispatch: (action: ActionsType) => void
 }
