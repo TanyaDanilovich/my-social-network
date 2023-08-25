@@ -18,7 +18,18 @@ export const UpdateNewPostTextAC = (newText: string): UpdateNewPostTextActionTyp
     newText: newText
 })
 
-const profileReducer = (state: ProfilePageType, action: ActionsType): ProfilePageType => {
+
+const initialState = {
+    postsObj: [
+        {id: 1, message: 'Привет', likesCount: 2},
+        {id: 2, message: 'Привет привет', likesCount: 5},
+        {id: 3, message: 'Привет привет привет', likesCount: 9},
+    ],
+    newPostText: ''
+
+}
+
+const profileReducer = (state: ProfilePageType = initialState, action: ActionsType): ProfilePageType => {
 
     if (action.type === UPDATE_NEW_POST_TEXT) {
         state.newPostText = action.newText
