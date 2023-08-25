@@ -1,23 +1,20 @@
 import React from 'react';
 import classes from './Profile.module.css'
-import MyPosts from './MyPosts/MyPosts';
 import ProfileInfo from './ProfileInfo';
 import mainBanner from '../../assets/MainBanner.png';
-import {ActionsType, ProfilePageType} from '../../redux/state';
+import {StoreType} from '../../redux/state';
+import MyPostsContainer from './MyPosts/MyPostsContainer';
 
 
 export type ProfilePropsType = {
     id: number
-    data: ProfilePageType
-    dispatch: (action: ActionsType) => void
+    store: StoreType
 }
-export default function Profile({id, data, dispatch}: ProfilePropsType) {
+export default function Profile({id, store}: ProfilePropsType) {
     return (
         <div className = {classes.wrapper}>
             <ProfileInfo title = {'Bringing you closer to the people.'} url = {mainBanner}/>
-            <MyPosts posts = {data.postsObj}
-                     newPostText = {data.newPostText}
-                     dispatch = {dispatch}/>
+            <MyPostsContainer store = {store}/>
         </div>
     )
 }

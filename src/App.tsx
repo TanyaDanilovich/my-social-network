@@ -27,9 +27,7 @@ function App({store, state, dispatch}: AppPropsType) {
                         <Route path = "/dialogs/*"
                                element = {<DialogsContainer id = {1} store = {store}/>}/>
                         <Route path = "/profile"
-                               element = {<Profile id = {1}
-                                                   data = {state.profilePage}
-                                                   dispatch = {dispatch}/>}/>
+                               element = {<Profile id = {1} store = {store}/>}/>
                         <Route path = "/music" element = {<Music id = {1}/>}/>
                         <Route path = "/setting" element = {<Setting id = {1}/>}/>
                         <Route path = "/news" element = {<News id = {1}/>}/>
