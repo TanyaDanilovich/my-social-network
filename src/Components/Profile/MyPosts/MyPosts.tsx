@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, KeyboardEvent} from 'react';
 import classes from './MyPosts.module.css'
 import Post from './Post/Post';
 import {PostsType} from '../../../redux/state';
@@ -19,6 +19,11 @@ export default function MyPosts({posts, newPostText, handleAddPost, newPostTextC
         newPostTextChange(event.currentTarget.value)
     }
 
+    const onEnterKeyDownHandler = (event: KeyboardEvent<HTMLTextAreaElement>) => {
+        if (event.key === "Enter") handleAddPost()
+        //console.dir(postRef.current)
+    }
+
     const localPosts = posts.map((p, index) =>
         <Post key = {`${index}-p`} message = {p.message}
               likesCount = {p.likesCount}/>)
@@ -27,7 +32,11 @@ export default function MyPosts({posts, newPostText, handleAddPost, newPostTextC
     return (
         <div className = {classes.wrapper}>
             <div>
-                <textarea ref = {postRef} value = {newPostText} onChange = {onChangeNewPostText}/>
+                <textarea ref = {postRef}
+                          value = {newPostText}
+                          onChange = {onChangeNewPostText}
+                          onKeyDown = {onEnterKeyDownHandler}
+                />
                 <button onClick = {handleAddPost}>Add post</button>
             </div>
             {localPosts}
